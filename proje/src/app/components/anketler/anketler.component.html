@@ -1,0 +1,194 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-8">
+      <h3>Anketler</h3>
+      <button class="btn btn-outline-primary" (click)="Ekle(modalEkleDuzenle)"
+       >Anket Ekle</button>
+      <table class="table table-hover mt-3">
+        <thead>
+
+          <th>Anket Adı</th>
+          <th>Eklenme Tarihi</th>
+          <th>Düzenleme Tarihi</th>
+
+          <th>Düzenle</th>
+          <th>Sil</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let anket of mevcutAnketler">
+            <td>{{anket.anketAdi}}</td>
+            <td>{{anket.kayTarih| date:'dd.MM.yyyy HH:mm:ss'}}</td>
+            <td>{{anket.duzTarih| date:'dd.MM.yyyy HH:mm:ss'}}</td>
+
+            <td><button class=" btn btn-outline-warning" (click)="Duzenle(anket,modalDuzenle)"
+    >Düzenle</button></td>
+            <td><button class="btn btn-outline-danger" (click)="Sil(anket,modalSil)"
+            >Sil</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" #modalEkleDuzenle>
+  <div class="modal-dialog">
+    <form [formGroup]="frm" (ngSubmit)="Kaydet()">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">{{modalBaslik}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label>Anket Adı</label>
+            <input type="text" class="form-control" formControlName="anketAdi">
+            <input type="hidden" class="form-control" formControlName="kayTarih">
+            <input type="hidden" class="form-control" formControlName="duzTarih">
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+
+          <input type="submit" class="btn btn-outline-primary" value="Kaydet">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Kapat</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal" tabindex="-1" #modalSil>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">{{modalBaslik}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 *ngIf="secAnket">{{secAnket.anketAdi}} adlı Anket Silinecektir Onaylıyor musunuz?</h6>
+      </div>
+      <div class="modal-footer">
+
+        <button class="btn btn-outline-danger" *ngIf="secAnket" (click)="anketSil()">Sil</button>
+        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" #modalDuzenle>
+  <div class="modal-dialog">
+    <form [formGroup]="duzenleForm" (ngSubmit)="anketDuzenle()">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">{{modalBaslik}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label>Anket Adı</label>
+            <input type="text" class="form-control" formControlName="anketAdi">
+
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+
+          <input type="submit" class="btn btn-outline-primary" value="Kaydet">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Kapat</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Sociology_Connection_Diagram.png" alt="" width="150"[height]="150"position=relative left="19000">
+
+<form name="" action="" method="">
+  <h2>Anket Kayıt Formu</h2>  
+  <table border="1">
+<tr>
+<td>Adı *</td>
+<td>
+              <input type="text" name="" size="40" required/>
+          </td>
+</tr>
+      <tr>
+<td>Soyadı *</td>
+<td>
+              <input type="text" name="" size="40" required/>
+          </td>
+</tr>
+<tr>
+
+<td>
+
+          </td>
+</tr>
+      <tr>
+
+<td>
+
+          </td>
+</tr>
+      <tr>
+
+<td>
+
+          </td>
+</tr>
+<tr>
+<td>Telefon (isteğe bağlı)*</td>
+<td>
+              <input type="tel" name="" placeholder="(___)(_______)" size="40" required/>
+          </td>
+</tr>
+      <tr>
+<td>Cinsiyet *</td>
+<td>
+              <input type="radio" name="cinsiyet"/> ERKEK
+              <input type="radio" name="cinsiyet"/> KADIN
+          </td>
+</tr>
+      <tr>
+<td>Doğum Tarihi *</td>
+<td>
+              <input type="date" name="" style="width:100%" required/>
+          </td>
+</tr>
+      <tr>
+<td colspan="2">
+              <input type="checkbox" id=""/> Anket Sözleşmesi şartlarını okudum ve kabul ediyorum.
+          </td>
+</tr>
+      <tr>
+<td colspan="2">
+              <input type="submit" value="KAYIT OL" id=""/>
+          </td>
+</tr>       
+</table>
+</form>
+
+<form>
+  <fieldset>
+      <legend>Örnek Anket</legend>
+      <p>Bu sene hangi futbol takımının şampiyon olacağını düşünüyorsunuz?</p>
+      <input type="radio" name="anket-1"/> Galatasaray <br>
+      <input type="radio" name="anket-1"/> Fenerbahçe <br>
+      <input type="radio" name="anket-1"/> Beşiktaş <br>
+      <input type="radio" name="anket-1"/> Trabzonspor <br>
+  </fieldset> 
+  <br /> 
+  <fieldset>
+      <legend>Örnek Anket</legend>
+      <p>En çok hangi sporları yapmayı seviyorsunuz?</p>
+      <input type="checkbox"> Futbol <br />
+      <input type="checkbox"> Basketbol <br />
+      <input type="checkbox"> Masa Tenisi <br />
+      <input type="checkbox"> Voleybol <br />
+  </fieldset>
+</form>
